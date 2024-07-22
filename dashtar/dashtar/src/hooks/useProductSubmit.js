@@ -345,6 +345,7 @@ const useProductSubmit = (id) => {
             setProductId(res.productId ? res.productId : res._id);
             setBarcode(res.barcode);
             setSku(res.sku);
+            
 
             res.categories.map((category) => {
               category.name = showingTranslateValue(category?.name, lang);
@@ -367,6 +368,9 @@ const useProductSubmit = (id) => {
             setTotalStock(res.stock);
             setOriginalPrice(res?.prices?.originalPrice);
             setPrice(res?.prices?.price);
+            setColorVariants(res?.colorvariants);
+            setConditionVariants(res?.conditionvariants);
+            setStorageVariants(res?.storagevariants);
           }
         } catch (err) {
           notifyError(err?.response?.data?.message || err?.message);
