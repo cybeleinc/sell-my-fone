@@ -4,6 +4,7 @@ const Category = require("../models/Category");
 const { languageCodes } = require("../utils/data");
 
 const addProduct = async (req, res) => {
+  console.log("REQBODY",req.body);
   try {
     const newProduct = new Product({
       ...req.body,

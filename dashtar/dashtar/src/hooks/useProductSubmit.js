@@ -146,7 +146,9 @@ const useProductSubmit = (id) => {
           [language]: data.description || "",
           // ...descriptionTranslates,
         }),
-        storages:storagevariants,
+        storagevariants:storagevariants,
+        colorvariants:colorvariants,
+        conditionvariants:conditionvariants,
         slug: data.slug
           ? data.slug
           : data.title.toLowerCase().replace(/[^A-Z0-9]+/gi, "-"),

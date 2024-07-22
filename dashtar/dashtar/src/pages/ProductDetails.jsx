@@ -153,6 +153,57 @@ const ProductDetails = () => {
                   ))}
                 </div>
               </div>
+              <div className="flex flex-col mt-4">
+                <p className="font-serif font-semibold py-1 text-gray-500 text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    {t("ProductStorages")}:{" "}
+                  </span>{" "}
+                </p>
+                <div className="flex flex-row">
+                  {data?.storagevariants.map((t, i) => (
+                    <span
+                      key={i + 1}
+                      className="bg-gray-200 mr-2 border-0 text-gray-500 rounded-full inline-flex items-center justify-center px-2 py-1 text-xs font-semibold font-serif mt-2 dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      {t.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col mt-4">
+                <p className="font-serif font-semibold py-1 text-gray-500 text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    {t("ProductColors")}:{" "}
+                  </span>{" "}
+                </p>
+                <div className="flex flex-row">
+                  {data?.colorvariants.map((t, i) => (
+                    <span
+                      key={i + 1}
+                      className="bg-gray-200 mr-2 border-0 text-gray-500 rounded-full inline-flex items-center justify-center px-2 py-1 text-xs font-semibold font-serif mt-2 dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      {t.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col mt-4">
+                <p className="font-serif font-semibold py-1 text-gray-500 text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    {t("ProductCondition")}:{" "}
+                  </span>{" "}
+                </p>
+                <div className="flex flex-row">
+                  {data?.conditionvariants.map((t, i) => (
+                    <span
+                      key={i + 1}
+                      className="bg-gray-200 mr-2 border-0 text-gray-500 rounded-full inline-flex items-center justify-center px-2 py-1 text-xs font-semibold font-serif mt-2 dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      {t.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
               <div className="mt-6">
                 <button
                   onClick={() => handleUpdate(id)}
