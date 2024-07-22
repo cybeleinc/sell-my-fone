@@ -58,7 +58,7 @@ export default defineConfig({
         start_url: ".",
         id: ".",
         short_name: "Dashtar - E-Commerce Website",
-        name: "Dashtar : React eCommerce Admin Dashboard",
+        name: "Sell My Fone",
         description:
           "Dashtar : React Grocery & Organic Food Store e-commerce Admin Dashboard",
         icons: [

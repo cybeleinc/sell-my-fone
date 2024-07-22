@@ -7,6 +7,7 @@ const { signInToken, tokenForVerify, sendEmail } = require("../config/auth");
 const Admin = require("../models/Admin");
 
 const registerAdmin = async (req, res) => {
+  console.log(req.body)
   try {
     const isAdded = await Admin.findOne({ email: req.body.email });
     if (isAdded) {
