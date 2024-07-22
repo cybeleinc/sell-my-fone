@@ -9,7 +9,7 @@ import {
   Table,
 } from "@windmill/react-ui";
 import Multiselect from "multiselect-react-dropdown";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { MultiSelect } from "react-multi-select-component";
 import { Modal } from "react-responsive-modal";
@@ -40,9 +40,17 @@ import SwitchToggleForCombination from "@/components/form/switch/SwitchToggleFor
 //internal import
 
 const ProductDrawer = ({ id }) => {
+  const [storages,setStorages]=useState([]);
+  const[colors,setColors]=useState([]);
+  const [conditions,setConditions]= useState([]);
   const { t } = useTranslation();
-
   const {
+    colorvariants,
+    setColorVariants,
+    conditionvariants,
+    setConditionVariants,
+    storagevariants,
+    setStorageVariants,
     tag,
     setTag,
     values,
@@ -90,6 +98,17 @@ const ProductDrawer = ({ id }) => {
   } = useProductSubmit(id);
 
   const { currency, showingTranslateValue } = useUtilsFunction();
+
+  useEffect(()=>{
+    setStorages([{label:"64GB",value:"64GB"},{label:"128GB",value:"128GB"},{label:"256GB",value:"256GB"},
+      {label:"512GB",value:"512GB"}
+    ])
+    setColors([{label:"Red",value:'red'},{label:"Blue",value:'blue'},{label:"Green",value:'green'},
+      {label:"White",value:'white'},{label:"Black",value:'black'},
+    ])
+    setConditions([{label:"Good",value:"good"},{label:"Poor",value:"poor"},{label:"Broken",value:"broken"}])
+  },[])
+
 
   return (
     <>
@@ -234,6 +253,69 @@ const ProductDrawer = ({ id }) => {
                     placeholder={t("ProductBarcode")}
                   />
                   <Error errorName={errors.barcode} />
+                </div>
+              </div>
+              <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
+                <LabelArea label={t("ProductStorages")} />
+                <div className="col-span-8 sm:col-span-4">
+                  <MultiSelect
+                    displayValue="name"
+                    isObject={true}
+                    singleSelect={false}
+                    hidePlaceholder={true}
+                    onKeyPressFn={function noRefCheck() {}}
+                    onRemove={function noRefCheck() {}}
+                    onSearch={function noRefCheck() {}}
+                    onSelect={(v) => setStorageVariants(v)}
+                    onChange={(v)=>setStorageVariants(v)}
+                    selectedValues={storagevariants}
+                    options={storages}
+                    value={storagevariants}
+                    register={register}
+                  ></MultiSelect>
+                  <Error errorName={errors.storagevariants} />
+                </div>
+              </div>
+              <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
+                <LabelArea label={t("ProductColors")} />
+                <div className="col-span-8 sm:col-span-4">
+                  <MultiSelect
+                    displayValue="label"
+                    isObject={true}
+                    singleSelect={false}
+                    hidePlaceholder={true}
+                    onKeyPressFn={function noRefCheck() {}}
+                    onRemove={function noRefCheck() {}}
+                    onSearch={function noRefCheck() {}}
+                    onSelect={(v) => setColorVariants(v)}
+                    onChange={(v)=>setColorVariants(v)}
+                    selectedValues={colorvariants}
+                    options={colors}
+                    value={colorvariants}
+                    register={register}
+                  ></MultiSelect>
+                  <Error errorName={errors.storagevariants} />
+                </div>
+              </div>
+              <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
+                <LabelArea label={t("ProductCondition")} />
+                <div className="col-span-8 sm:col-span-4">
+                  <MultiSelect
+                    displayValue="label"
+                    isObject={true}
+                    singleSelect={false}
+                    hidePlaceholder={true}
+                    onKeyPressFn={function noRefCheck() {}}
+                    onRemove={function noRefCheck() {}}
+                    onSearch={function noRefCheck() {}}
+                    onSelect={(v) => setConditionVariants(v)}
+                    onChange={(v)=>setConditionVariants(v)}
+                    selectedValues={conditionvariants}
+                    options={conditions}
+                    value={conditionvariants}
+                    register={register}
+                  ></MultiSelect>
+                  <Error errorName={errors.storagevariants} />
                 </div>
               </div>
 

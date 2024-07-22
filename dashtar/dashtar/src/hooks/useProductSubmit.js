@@ -32,7 +32,7 @@ const useProductSubmit = (id) => {
   const [variant, setVariant] = useState([]);
   const [totalStock, setTotalStock] = useState(0);
   const [quantity, setQuantity] = useState(0);
-
+  
   const [originalPrice, setOriginalPrice] = useState(0);
   const [price, setPrice] = useState(0);
   const [sku, setSku] = useState("");
@@ -54,6 +54,9 @@ const useProductSubmit = (id) => {
   const [openModal, setOpenModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [slug, setSlug] = useState("");
+  const [storagevariants, setStorageVariants]= useState([]);
+  const [colorvariants,setColorVariants]=useState([]);
+  const [conditionvariants,setConditionVariants]= useState([]);
 
   // const { handlerTextTranslateHandler } = useTranslationValue();
   const { showingTranslateValue, getNumber, getNumberTwo } = useUtilsFunction();
@@ -79,7 +82,11 @@ const useProductSubmit = (id) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // console.log('data is data',data)
+    console.log("Storagessss",storagevariants);
+     console.log('data is data',data)
+     data.storagevariants = storagevariants;
+     data.colorvariants=colorvariants;
+     data.conditionvariants=conditionvariants;
     try {
       setIsSubmitting(true);
       if (!imageUrl) return notifyError("Image is required!");
@@ -93,6 +100,11 @@ const useProductSubmit = (id) => {
       if (!defaultCategory[0]) {
         setIsSubmitting(false);
         return notifyError("Default Category is required!");
+      }
+
+      if(!storagevariants[0]){
+        setIsSubmitting(false);
+        return notifyError("Storages is required!");
       }
 
       const updatedVariants = variants.map((v, i) => {
@@ -134,6 +146,7 @@ const useProductSubmit = (id) => {
           [language]: data.description || "",
           // ...descriptionTranslates,
         }),
+        storages:storagevariants,
         slug: data.slug
           ? data.slug
           : data.title.toLowerCase().replace(/[^A-Z0-9]+/gi, "-"),
@@ -181,7 +194,7 @@ const useProductSubmit = (id) => {
         }
       } else {
         const res = await ProductServices.addProduct(productData);
-        // console.log("res is ", res);
+         console.log("res is ", res);
         if (isCombination) {
           setUpdatedId(res._id);
           setValue("title", res.title[language ? language : "en"]);
@@ -257,6 +270,9 @@ const useProductSubmit = (id) => {
       setValue("price");
       setValue("barcode");
       setValue("productId");
+      setValue("storagevariants");
+      setValue("colorvariants");
+      setValue("conditionvariants")
 
       setProductId("");
       // setValue('show');
@@ -284,6 +300,9 @@ const useProductSubmit = (id) => {
       setValue("originalPrice", 0);
       clearErrors("show");
       clearErrors("barcode");
+      clearErrors("storagevariants");
+      clearErrors("colorvariants");
+      clearErrors("conditionvariants");
       setIsCombination(false);
       setIsBasicComplete(false);
       setIsSubmitting(false);
@@ -649,6 +668,12 @@ const useProductSubmit = (id) => {
   };
 
   return {
+    colorvariants,
+    setColorVariants,
+    conditionvariants,
+    setConditionVariants,
+    storagevariants,
+    setStorageVariants,
     tag,
     setTag,
     values,
